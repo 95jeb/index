@@ -31,6 +31,9 @@ app.use(cors())
 
 
 // for login
+app.get ('/' , (req,res)=>{
+    res.send('hello')
+})
 
 app.post ('/signin', (req,res) => {
     const{email ,password} = req.body
