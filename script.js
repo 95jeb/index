@@ -44,17 +44,11 @@ app.post ('/signin', (req,res) => {
   .from('login')
   .where('email' , "=" , email)
   .then(data =>{
-      console.log(data[0].password)
     const isValid = true // bcrypt.compareSync(password , data[0].password)
     if (isValid) {
-    //    return database.select('*').from ('persons')
-    //     .where('email', '=', email)
-        res.status(200).json('good logged in')
-        // .then(user =>{
-        //     res.status(200).json(user[0])
-        // })
+   
+        res.status(200).json('log in successful')
         
-        // .catch(err => res.status(400).json("unable to connecc"))
     }else{
         res.status(400).json("Wrong credentials")
     }
