@@ -12,10 +12,10 @@ const database = knex({
     // version: '15.1',
     
     connection: {  
-        host : "process.env.HOST",
-        user : "process.env.USERNAME",
-        password : "process.env.PASSWORD",
-        database : "process.env.DATABASE",
+        host : process.env.HOST,
+        user : process.env.USERNAME,
+        password : process.env.PASSWORD,
+        database : process.env.DATABASE,
         timezone: 'utc',
         port: "3306"
 }
