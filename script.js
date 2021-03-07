@@ -54,19 +54,24 @@ app.post ('/signin', (req,res) => {
     
     const isValid =  (password == data[0].password)
     if (isValid) {
- return database.select("*").from("login")
-   jwt.sign({data}, 'secretkey', { expiresIn: '2h' }, (err, token) => {
+   return database.select("*").from("login")
+   .where('email', '=', email)
+        
+   .then(user =>{
+   jwt.sign({user}, 'secretkey', { expiresIn: '2h' }, (err, token) => {
             res.json({
               token
             });
         
     })
+    
+    })
+    
   }
-    else{
+  else{
         res.status(400).json("Wrong credentials")
     }
-  
-  })
+})
  
   
   .catch(err => res.status(400).json("Wrong credentials"))
