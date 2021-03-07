@@ -41,15 +41,20 @@ app.post ('/signin', (req,res) => {
     if (!email  || !password) {
         return res.status(400).json("incorrect form submission")
     }
+  // database.select('email' , "password")
+  // .from('login')
+  // .where({
+  // email: email,
+  // password: password
+  // })
   database.select('email' , "password")
-  .from('index')
-  .where({
-  email: email,
-  password: password
-  })
+  .from('login')
+  .where('email' , "=" , email)
   .then(data =>{
-    const isValid = true
+    
+    const isValid =  (password == data[0].password)
     if (isValid) {
+ return database.select("*").from("login")
    jwt.sign({data}, 'secretkey', { expiresIn: '2h' }, (err, token) => {
             res.json({
               token
