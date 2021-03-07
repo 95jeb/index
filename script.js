@@ -84,6 +84,16 @@ function verifyToken(req, res, next) {
 
 }
 
+app.get("/verify",verifyToken,(req,res)=>{
+      jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if(err) {
+          res.status(403).json("Please Login");
+        } else {
+          res.json("ERROR")
+        }
+      });
+})
+
 // for register (if needed)
 
 // app.post('/register',(req,res) =>{
