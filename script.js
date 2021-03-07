@@ -5,6 +5,7 @@ const BodyParser = require("body-parser")
 const cors = require('cors') 
 const bcrypt = require('bcrypt-nodejs')
 const knex = require('knex')
+const jwt = require('jsonwebtoken');
 
 
 const database = knex({
@@ -42,12 +43,17 @@ app.post ('/signin', (req,res) => {
     }
   database.select('email' , "password")
   .from('index')
-  .where('email' , "=" , email)
+  .where({
+  email: email,
+  password: password
+  })
   .then(data =>{
-    const isValid = true // bcrypt.compareSync(password , data[0].password)
+    const isValid = true
     if (isValid) {
-   
-        res.status(200).json('log in successful')
+   jwt.sign({data}, 'secretkey', { expiresIn: '2h' }, (err, token) => {
+            res.json({
+              token
+            });
         
     }else{
         res.status(400).json("Wrong credentials")
@@ -57,6 +63,26 @@ app.post ('/signin', (req,res) => {
   
   .catch(err => res.status(400).json("Wrong credentials"))
 })
+
+function verifyToken(req, res, next) {
+  // Get auth header value
+  const bearerHeader = req.headers['authorization'];
+  // Check if bearer is undefined
+  if(typeof bearerHeader !== 'undefined') {
+    // Split at the space
+    const bearer = bearerHeader.split(' ');
+    // Get token from array
+    const bearerToken = bearer[1];
+    // Set the token
+    req.token = bearerToken;
+    // Next middleware
+    next();
+  } else {
+    // Forbidden
+    res.status(403).json("Please login");
+  }
+
+}
 
 // for register (if needed)
 
