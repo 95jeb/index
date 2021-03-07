@@ -41,7 +41,7 @@ app.post ('/signin', (req,res) => {
         return res.status(400).json("incorrect form submission")
     }
   database.select('email' , "password")
-  .from('login')
+  .from('index')
   .where('email' , "=" , email)
   .then(data =>{
     const isValid = true // bcrypt.compareSync(password , data[0].password)
