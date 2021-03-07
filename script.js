@@ -55,9 +55,12 @@ app.post ('/signin', (req,res) => {
               token
             });
         
-    }else{
+    })
+  }
+    else{
         res.status(400).json("Wrong credentials")
     }
+  
   })
  
   
