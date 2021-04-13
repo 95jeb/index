@@ -144,7 +144,7 @@ app.get("/verify",verifyToken,(req,res)=>{
         if(err) {
           res.status(403).json("Please Login");
         } else {
-          res.json("Working"),
+//           res.json("Working"),
               authData
         }
       });
