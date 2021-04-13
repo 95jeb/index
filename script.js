@@ -146,7 +146,7 @@ app.get("/verify",verifyToken,(req,res)=>{
         } else {
           res.json({
           message: "Working",
-          authData.user[0] 
+          Data: authData.user[0] 
           })
               
         }
