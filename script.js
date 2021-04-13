@@ -147,7 +147,7 @@ app.get("/verify",verifyToken,(req,res)=>{
           res.json({
           message: "Working",
           authData 
-          }),
+          })
               
         }
       });
