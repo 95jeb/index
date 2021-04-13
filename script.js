@@ -96,7 +96,7 @@ app.post ('/sign-in', (req,res) => {
     
     const isValid =  (password == data[0].password)
     if (isValid) {
-   return database.select("*").from("login1")
+   return database.select('school','name').from("login1")
    .where('email', '=', email)
         
    .then(user =>{
